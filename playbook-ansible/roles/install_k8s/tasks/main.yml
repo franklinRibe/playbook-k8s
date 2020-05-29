@@ -1,0 +1,6 @@
+---
+- include_tasks: swappof.yml
+- include_tasks: install-docker.yml
+- include_tasks: install-kubetools.yml
+- include_tasks: conf_cluster.yml
+

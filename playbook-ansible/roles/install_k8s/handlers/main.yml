@@ -1,0 +1,14 @@
+---
+# restart docker
+
+- name: docker status
+  become: yes
+  service: 
+    name: docker
+    state: started
+
+- name: restart docker
+  become: yes
+  systemd:
+    name: docker
+    state: restarted
