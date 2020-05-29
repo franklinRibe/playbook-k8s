@@ -1,5 +1,5 @@
 ---
-  - name: Install packages that allow apt to be used over HTTPS
+  - name: Instala os pacotes necessarios
     apt:
       name: "{{ packages }}"
       state: present
@@ -12,17 +12,17 @@
       - gnupg-agent
       - software-properties-common
 
-  - name: Add an apt signing key for Docker
+  - name: Adiciona a chave do repo do Docker
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
       state: present
 
-  - name: Add apt repository for stable version
+  - name: Adiciona o repo para o ubuntu
     apt_repository:
       repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
       state: present
 
-  - name: Install docker and its dependencies
+  - name: Instala o Docker e dependências
     apt: 
       name: "{{ packages }}"
       state: present
@@ -34,8 +34,3 @@
       - containerd.io
     notify:
       - docker status
-
-  - name: Add user to docker group
-    user:
-      name: api
-      group: docker

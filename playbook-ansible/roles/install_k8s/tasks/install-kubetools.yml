@@ -1,16 +1,16 @@
 ---
-- name: Add an apt signing key for Kubernetes
+- name: Adiciona a chave do repo do Kubernetes
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     state: present
 
-- name: Adding apt repository for Kubernetes
+- name: Adiciona o repo do k8s para o ubuntu
   apt_repository:
     repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
     state: present
     filename: kubernetes.list
 
-- name: Install Kubernetes binaries
+- name: Instala os pacotes do kubeadm, kubectl e kubelet
   apt: 
     name: "{{ packages }}"
     state: present
@@ -21,7 +21,7 @@
       - kubeadm 
       - kubectl
 
-- name: Restart kubelet
+- name: Restart o daemon kubelet
   service:
     name: kubelet
     daemon_reload: yes

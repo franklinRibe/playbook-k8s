@@ -3,29 +3,29 @@
   become: true
   become_user: root
   tasks:
-    - name: Initialize the Kubernetes cluster using kubeadm
+    - name: Inicia o cluster do k8s usando o kubeadm
       command: "{{ item }}"
       with_items:
         - kubeadm config images pull  
         - kubeadm init
 
-    - name: Create Directory and Conf file to kubeadm
+    - name: Cria o arquivo de conf para usar o kubectl
       command: "{{ item }}"
       with_items:
         - mkdir -p $HOME/.kube
         - cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
    
-    - name: Copy the Manifest to install WaveNet
+    - name: Envia o manifesto da Wavenet para o host
       copy:
         src: ./files/weave-daemonset.yaml
         dest: $HOME/
       
-    - name: Install WaveNet pod network
+    - name: Instala o WaveNet para a rede do k8s
       command: kubectl apply -f $HOME/weave-daemonset.yaml
     
-    - name: Generate join command
+    - name: Gera a chave para ser usada no join 
       command: kubeadm token create --print-join-command
       register: join_command
 
-    - name: Copy join command to local file
+    - name: Copia a chave do join para arquivo local
       local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./join-command"

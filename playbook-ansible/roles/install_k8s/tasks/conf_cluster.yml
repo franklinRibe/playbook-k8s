@@ -1,10 +1,10 @@
 ---
-- name: Copy the file json to the cluster
+- name: Leva o json que altera o daemon do docker para o systemd
   copy:
     src: ./files/daemon.json
     dest: /etc/docker/daemon.json
 
-- name: Enable docker Service
+- name: Criar o faz o restart do deamon do docker
   become: yes    
   command: mkdir -p /etc/systemd/system/docker.service.d  
   notify: restart docker
