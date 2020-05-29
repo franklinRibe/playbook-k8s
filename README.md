@@ -1,6 +1,6 @@
 # Instalação do K8s via ansible
 
-Criei uma role para instalar nas 3 máquinas do cluster os pacotes necessários para o Docker e o kubernetes
+Role criada para instalar os pacotes necessários para criar um cluster kubernetes.
 
 ## Para executar a playbook
 
