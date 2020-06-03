@@ -1,0 +1,1 @@
+kubeadm join 192.168.10.7:6443 --token 4xwcko.uxepuv21reilyrce     --discovery-token-ca-cert-hash sha256:682b7e3936514cd4a06eac501e0d189b06b1fd5136f4ac2b55f9fd35dedac229 
